@@ -43,6 +43,38 @@ public class LeetCodeTest {
 		return result;
 	}
 
+	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int len1 = nums1.length;
+		int len2 = nums2.length;
+		int unionLen = len1 + len2;
+		int i = 0;
+		int j = 0;
+		int k = 0;
+
+		int[] unionNums = new int[len1 + len2];
+		while ((i < len1) && (j < len2) && (k < unionLen)) {
+			if (nums1[i] < nums2[j]) {
+				unionNums[k++] = nums1[i++];
+			} else if (nums1[i] > nums2[j]) {
+				unionNums[k++] = nums2[j++];
+			} else {
+				unionNums[k++] = nums1[i];
+				i++;
+				j++;
+			}
+		}
+		
+		if ( i == len1)
+		{
+			while(j < len2)
+			{
+				unionNums[k++] = nums2[j++];
+			}
+		}
+		
+		return k;
+	}
+
 	public static void main(String[] args) {
 		String s = "bbbbb";
 		int result = lengthOfLongestSubstring(s);
